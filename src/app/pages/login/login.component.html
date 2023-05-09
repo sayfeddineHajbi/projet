@@ -1,0 +1,32 @@
+<h1>Sign-Up</h1>
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="save(f)">
+    <div>
+      <label>LOGIN</label> 
+      <input name="login" type="text" class="form-control" ngModel #l="ngModel" required minlength="4">
+      <div class="alert alert-danger" *ngIf="l.invalid && l.touched"> 
+        <div *ngIf="l.errors?.['required']">Login is required</div>
+        <div *ngIf="l.errors?.['minlength']">Login must be at least 4 characters</div>
+      </div>
+    </div>
+    <div>
+      <label>EMAIL</label>
+      <input name="email" type="text" class="form-control" required ngModel #e="ngModel"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+      <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+        <div *ngIf="e.errors?.['required']">EMAIL is required</div>
+        <div *ngIf="e.errors?.['pattern']">Invalid EMAIL pattern</div>
+      </div>
+    </div>
+    <div>
+      <label> PASSWORD</label>
+      <input name="password" type="password" class="form-control" ngModel #p="ngModel" required minlength="8">
+      <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+        <div *ngIf="p.errors?.['required']">PASSWORD is required</div>
+        <div *ngIf="p.errors?.['minlength']">PASSWORD must contain at least 8 characters</div>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-success" [disabled]="f.invalid" type="submit">Save</button>
+  </form>        
+</div>
